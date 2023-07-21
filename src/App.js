@@ -3,6 +3,20 @@ import { useSelector, useDispatch, connect } from 'react-redux'
 import { clearData, fetchData, incrementId, decrementId, inputId } from './features/dataSlice'
 import { useEffect } from 'react';
 
+// error came out  Line 11:1: React Hook "useEffect" cannot be called at the top level. 
+// React Hooks must be called in a React function component or a custom React Hook function  
+// react-hooks/rules-of-hooks
+
+const mapStateToProps = (state) => ({
+  objectId: state.data.objectId
+})
+
+
+useEffect(() => {
+  dispatch(fetchData())
+}, [props.objectId, dispatch])
+
+
 function App(props) {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.data)
@@ -15,9 +29,9 @@ function App(props) {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchData())
-  }, [props.objectId, dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchData())
+  // }, [props.objectId, dispatch])
 
 
   return (
@@ -40,6 +54,4 @@ function App(props) {
 }
 
 
-const mapStateToProps = (state, ownProps) => ({ objectId: state.data.objectId })
-
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)
