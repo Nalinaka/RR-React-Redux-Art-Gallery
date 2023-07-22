@@ -12,11 +12,6 @@ const mapStateToProps = (state) => ({
 })
 
 
-useEffect(() => {
-  dispatch(fetchData())
-}, [props.objectId, dispatch])
-
-
 function App(props) {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.data)
@@ -29,9 +24,10 @@ function App(props) {
     }
   }
 
-  // useEffect(() => {
-  //   dispatch(fetchData())
-  // }, [props.objectId, dispatch])
+
+  useEffect(() => {
+    dispatch(fetchData())
+  }, [props.objectId, dispatch])
 
 
   return (
